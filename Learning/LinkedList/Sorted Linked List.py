@@ -44,52 +44,49 @@ class LinkedList:
                 else:
                     current = current.next
 
-def reverse_linked_list(head):
-    # Base case
-    if head is None or head.next is None:
-        return head
-
-    # Recursive step
-    p = reverse_linked_list(head.next)
-    head.next.next = head
-    head.next = None
-    return p
 
 
 
-print("Linked List")
+## creating two linked lists
+print("LinkedList A")
 print("=====================================")
-ll = LinkedList(Node(20))
-ll.add_node_start(16)
-ll.add_node_start(11)
-ll.add_node_start(4)
-print(ll.print_values())
+lla = LinkedList(Node(40))
+lla.add_node_start(22)
+lla.add_node_start(8)
+lla.add_node_start(1)
+print(lla.print_values())
 
-""" 
-Reverse Linked (in place) has time complexity of 0(n) 
-    - printing the linked list is 0(n) where n is the number of nodes in the Linked List
-    - reversing the linked list is 0(n) where n is the number of nodes in the linked list (due to the recursive call stack)
-    - Overall time complexity of 0(n)
-
-Has a space compleixty of 0(n)
-    - printing the values is 0(n) where the number of nodes in the linked list 
-    - reversing is 0(n) where the number of nodes in the linked list
-    - Overall space complexity of 0(n)
-"""
-print("Reversed Linked List (in place)")
+print("LinkedList B")
 print("=====================================")
-ll.head = reverse_linked_list(ll.head)
-print(ll.print_values())
+llb = LinkedList(Node(20))
+llb.add_node_start(16)
+llb.add_node_start(11)
+llb.add_node_start(4)
+print(llb.print_values())
 
 
-""" 
-This method creates a new LinkedList object to store the reversed list
-Space and time complexity are the same as previous method because we take the worst case which is 0(n) still for space and time.
-"""
-print("Reversed Linked List (again)")
+## Merge Sorted  Linked Lists
+
+def sort_merge(node_a, node_b):
+    if node_a is None:
+        return node_b
+    if node_b is None:
+        return node_a
+
+    if node_a.value < node_b.value:
+        node_a.next = sort_merge(node_a.next, node_b)
+        return node_a
+    else:
+        node_b.next = sort_merge(node_a, node_b.next)
+        return node_b
+
+ll_sort_merge = LinkedList(sort_merge(lla.head, llb.head))
+
+print("Sorted Merged LinkedList A and B")
 print("=====================================")
-reverse_ll = LinkedList(reverse_linked_list(ll.head))
-print(reverse_ll.print_values())
+print(ll_sort_merge.print_values())
+
+
 
 
 
