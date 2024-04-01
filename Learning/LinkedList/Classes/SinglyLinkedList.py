@@ -1,6 +1,6 @@
 from .Node import Node
 class LinkedList:
-    def __init__(self, head_value):
+    def __init__(self, head_value=None):
         self.head = Node(head_value)
         self.next = next
 
@@ -17,9 +17,9 @@ class LinkedList:
         while current_node:
 
             if current_node.next is None:
-                string += " ({0})".format(current_node.value)
+                string += "({0})".format(current_node.value)
             else:
-                string += " ({0}) ->".format(current_node.value)
+                string += "({0}) ->".format(current_node.value)
 
             current_node = current_node.next
         print(string)
