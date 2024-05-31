@@ -1,21 +1,34 @@
+"""
+    Got this question after 15 minutes of coding.
 
+    Mind went blank initially and had to rest a bit before returning.
+    Solved this question before but forgot the solution.
 
+    Difficulty 4/10
+"""
 
-def longestCommonPrefix(strs):
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
 
-    if not strs:
-        return ""
+        if len(strs) == 1:
+            return strs[0]
 
-    shortest_word = min(strs, key=len)
+        strs.sort(key=len)
+        shortest = strs[0]
+        pointer = 0
+        prefix = ""
 
-    for i, char in enumerate(shortest_word):
-        print(i, char)
+        while pointer < len(shortest):
+            all_match = True
+            for word in strs:
+                if word[pointer] != shortest[pointer]:
+                    all_match = False
 
-        for other_word in strs:
-            if other_word[i] != char:
-                return shortest_word[:i]
+            if all_match:
+                prefix += word[pointer]
+            else:
+                break
 
-    return shortest_word
+            pointer += 1
 
-
-longestCommonPrefix(["flower","flow","flight"])
+        return prefix
